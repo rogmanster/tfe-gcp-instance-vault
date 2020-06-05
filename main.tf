@@ -3,11 +3,11 @@ terraform {
 }
 
 provider "vault" {
-  
+
 }
 
 data "vault_generic_secret" "gcp_cred" {
-  path = "gcp/key/my-token-roleset"
+  path = "gcp/token/my-token-roleset"
 }
 
 provider "google" {
