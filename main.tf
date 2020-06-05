@@ -2,8 +2,17 @@ terraform {
   required_version = ">= 0.12"
 }
 
+provider "vault" {
+  
+}
+
+data "vault_generic_secret" "gcp_cred" {
+  path = "gcp/key/my-token-roleset"
+}
+
 provider "google" {
-  credentials = var.gcp_credentials
+  #credentials = var.gcp_credentials
+  access_token = data.vault_generic_secret.gcp_cred.data["token"]
   project     = var.gcp_project
   region      = var.gcp_region
 }
